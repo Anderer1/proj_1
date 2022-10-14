@@ -21,7 +21,6 @@ class MinimalSubscriber(Node):
 
 
     def listener_callback(self, msg):
-        self.get_logger().info('I heard: "%s"' % msg.data)
         comang = VehCmd()
         if msg.buttons[2] == 1:
             comang.throttle_effort = 0
