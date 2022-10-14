@@ -23,7 +23,7 @@ class MinimalSubscriber(Node):
     def listener_callback(self, msg):
         comang = VehCmd()
         if msg.buttons[2] == 1:
-            comang.throttle_effort = 0
+            comang.throttle_effort = 0.0
         comang.throttle_effort = msg.axes[2]*100
         comang.steering_angle = msg.axes[4]*45
         led = Int16()
