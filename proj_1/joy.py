@@ -24,8 +24,8 @@ class MinimalSubscriber(Node):
         comang = VehCmd()
         if msg.buttons[2] == 1:
             comang.throttle_effort = 0.0
-        comang.throttle_effort = msg.axes[2]*100
-        comang.steering_angle = msg.axes[4]*45
+        comang.throttle_effort = msg.axes[5]*100
+        comang.steering_angle = msg.axes[1]*45
         led = Int16()
         led.data = 1
 
