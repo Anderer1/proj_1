@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'listener = proj_1.proj_1:main'
         ],
     },
 )
