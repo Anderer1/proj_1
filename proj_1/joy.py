@@ -1,9 +1,12 @@
 import rclpy
+import time
 from rclpy.node import Node
 
 from std_msgs.msg import Int16
 from sensor_msgs.msg import Joy
 from drive_interfaces.msg import VehCmd
+from nav_msgs import Odometry
+
 
 
 class MinimalSubscriber(Node):
@@ -24,7 +27,20 @@ class MinimalSubscriber(Node):
         comang = VehCmd()
         if msg.buttons[2] == 1:
             comang.throttle_effort = 0.0
-        comang.throttle_effort = msg.axes[1]*100
+        Kp = 0.0
+        Ki = 0.0
+        Kd = 0.0
+
+        #r = msg.axes[1]*100*7.3513268 #the 7.35 is the max velocity in m/s
+        #y = msg.twist.x 
+        #et = r - y
+        et = (msg.axes[1]*100*7.3513268)  - msg.twist.x 
+        self.etlast = et
+        deltaT = 0.1
+        integ =  et*deltaT
+        self.oldinteg = 0;
+        self.oldinteg = self.oldinteg + integ
+        comang.throttle_effort = (Kp*et) + Ki*(self.oldinteg) + (Kd*((et -self.etlast)/deltaT))
         comang.steering_angle = msg.axes[3]*45
         led = Int16()
         led.data = 1
