@@ -25,8 +25,16 @@ class MinimalSubscriber(Node):
 
     def listener_callback(self, msg):
         comang = VehCmd()
-        if msg.buttons[2] == 1:
+        count = 0
+        if msg.buttons[1] == 1:
             comang.throttle_effort = 0.0
+        if msg.buttons[0] == 1:
+            if count == 0:
+                comang.throttle_effort = 0.25*100*7.3513268
+                count = 1
+            else: 
+                comang.throttle_effort = 0.0
+                count = 0
         Kp = 0.01
         Ki = 0.0
         Kd = 0.0
