@@ -3,6 +3,7 @@ import time
 from rclpy.node import Node
 
 from std_msgs.msg import Int16
+from std_msgs.msg import Float32
 from sensor_msgs.msg import Joy
 from drive_interfaces.msg import VehCmd
 from nav_msgs import Odometry
@@ -20,6 +21,8 @@ class MinimalSubscriber(Node):
             10)
         self.pub1 = self.create_publisher(Int16, 'led_color', 10)
         self.pub2 = self.create_publisher(VehCmd, 'vehicle_command_angle', 10)
+        self.pub3 = self.create_publisher(Float32, 'error', 10)
+        self.pub4 = self.create_publisher(Float32, 'velocity_output', 10)
         self.subscription  # prevent unused variable warning
 
 
@@ -55,6 +58,8 @@ class MinimalSubscriber(Node):
 
         self.pub1.publish(led)
         self.pub2.publish(comang)
+        self.pub3.publish(et)
+        self.pub4.publish(comang.throttle_effort)
 
 def main(args=None):
     rclpy.init(args=args)
