@@ -27,7 +27,7 @@ class MinimalSubscriber(Node):
         comang = VehCmd()
         if msg.buttons[2] == 1:
             comang.throttle_effort = 0.0
-        Kp = 1.0
+        Kp = 0.01
         Ki = 0.0
         Kd = 0.0
 
