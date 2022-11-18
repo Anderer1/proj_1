@@ -46,6 +46,7 @@ class MinimalSubscriber(Node):
         #y = msg.twist.x 
         #et = r - y
         et = (msg.axes[1]*100*7.3513268)  - msg.twist.x 
+        print(et)
         self.etlast = et
         deltaT = 0.1
         integ =  et*deltaT
@@ -60,6 +61,7 @@ class MinimalSubscriber(Node):
         self.pub2.publish(comang)
         self.pub3.publish(et)
         self.pub4.publish(comang.throttle_effort)
+        
 
 def main(args=None):
     rclpy.init(args=args)
