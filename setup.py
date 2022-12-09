@@ -10,6 +10,7 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        (os.path.join("share", package_name), glob("launch/*_launch.py")),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -20,7 +21,10 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'listener = proj_1.joy:main'
+            'listener1 = proj_1.joy:main'
+            'listener2 = proj_1.launch_point_at_carrot:main'
+            'listener3 = proj_1.PoseEstimator:main'
+            'listener4 = proj_1.vehicle_controller:main'
         ],
     },
 )
